@@ -7,20 +7,20 @@ export class ErrorInterceptor implements HttpInterceptor{
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(req).pipe(
             catchError(error => {
-                if(error.status===401){
+                if (error.status === 401) {
                     return throwError(error.statusText);
                 }
-                if (error instanceof HttpErrorResponse){
+                if (error instanceof HttpErrorResponse) {
                     const applicationError = error.headers.get('Application-Error');
-                    if(applicationError){
+                    if (applicationError) {
                         return throwError(applicationError);
                     }
                     const serverError = error.error;
                     let modalStateErrors = '';
-                    if(serverError.errors && typeof serverError.errors ==='object'){
-                        for (const key in serverError.errors){
-                            if(serverError.errors[key]){
-                                modalStateErrors += serverError.errors[key]+'\n';
+                    if(serverError.errors && typeof serverError.errors === 'object') {
+                        for (const key in serverError.errors) {
+                            if (serverError.errors[key]) {
+                                modalStateErrors += serverError.errors[key] + '\n';
                             }
                         }
                     }
@@ -29,11 +29,10 @@ export class ErrorInterceptor implements HttpInterceptor{
             })
         )
     }
+}
 
-} 
-
-export const ErrorInterceptorProvider ={
+export const ErrorInterceptorProvider = { 
     provide: HTTP_INTERCEPTORS,
     useClass: ErrorInterceptor,
-    multi:true 
-}
+    multi: true
+};

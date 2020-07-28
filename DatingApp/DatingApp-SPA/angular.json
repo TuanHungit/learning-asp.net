@@ -25,7 +25,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/alertifyjs/build/alertify.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -123,8 +125,5 @@
       }
     }
   },
-  "defaultProject": "DatingApp-SPA",
-  "cli": {
-    "analytics": "9375508f-5edf-4b7b-8fab-6b1b5da05b09"
-  }
+  "defaultProject": "DatingApp-SPA"
 }
